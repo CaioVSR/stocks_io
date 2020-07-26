@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stocks_io/core/widgets/app_floating_action_button.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 import '../home_controller.dart';
@@ -73,21 +74,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                 ),
         );
       }),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: AppColors.tiber,
-        icon: Icon(
-          Icons.add,
-          color: AppColors.irisBlue,
-          size: 24.sp,
-        ),
-        label: Text(
-          'Adicionar Ativos',
-          style: AppTextStyle.p(fontWeight: FontWeight.bold, color: AppColors.white),
-        ),
-        onPressed: () {
-          controller.increment();
-          Modular.to.pushNamed('/home/stockPickPage');
-        },
+      floatingActionButton: AppFloatingActionButton(
+        onPressed: () => Modular.to.pushNamed('/home/stockPickPage'),
       ),
     );
   }
