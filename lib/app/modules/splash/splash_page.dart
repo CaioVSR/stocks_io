@@ -14,6 +14,14 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
   //use 'controller' variable to access controller
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 2), () {
+      Modular.to.pushReplacementNamed('/home');
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
