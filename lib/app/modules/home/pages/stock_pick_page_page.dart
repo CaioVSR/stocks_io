@@ -34,7 +34,7 @@ class _StockPickPagePageState extends ModularState<StockPickPagePage, HomeContro
           onPressed: () => Modular.to.pop(),
         ),
         title: Image.asset(
-          'assets/images/stocks_io_small_logo.png',
+          'assets/images/logo_small.png',
           height: 25.h,
         ),
       ),

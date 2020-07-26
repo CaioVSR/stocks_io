@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'splash_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,18 +18,24 @@ class _SplashPageState extends ModularState<SplashPage, SplashController> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 2), () {
-      Modular.to.pushReplacementNamed('/home');
+      Modular.to.pushReplacementNamed('/login');
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, width: 375, height: 812);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[],
+      body: Center(
+        child: Hero(
+          tag: 'logo',
+          child: Image.asset(
+            'assets/images/logo_large.png',
+            width: 300.w,
+            fit: BoxFit.contain,
+          ),
+        ),
       ),
     );
   }

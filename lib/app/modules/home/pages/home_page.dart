@@ -19,14 +19,16 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 375, height: 812);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.grey250,
         elevation: 0,
-        title: Image.asset(
-          'assets/images/stocks_io_small_logo.png',
-          height: 25.h,
+        title: Hero(
+          tag: 'logo',
+          child: Image.asset(
+            'assets/images/logo_small.png',
+            height: 25.h,
+          ),
         ),
       ),
       body: Observer(builder: (_) {
@@ -84,7 +86,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
         onPressed: () {
           controller.increment();
-          Modular.to.pushNamed('/stockPickPage');
+          Modular.to.pushNamed('/home/stockPickPage');
         },
       ),
     );

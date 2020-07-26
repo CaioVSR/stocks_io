@@ -1,3 +1,4 @@
+import 'package:stocks_io/app/modules/login/login_module.dart';
 import 'package:stocks_io/app/modules/splash/splash_module.dart';
 
 import 'app_controller.dart';
@@ -15,6 +16,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router('/', module: SplashModule()),
+        Router('/login', module: LoginModule(), transition: TransitionType.fadeIn),
         Router('/home', module: HomeModule()),
       ];
 
