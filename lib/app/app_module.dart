@@ -1,3 +1,5 @@
+import 'package:stocks_io/app/modules/splash/splash_module.dart';
+
 import 'app_controller.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,8 @@ class AppModule extends MainModule {
 
   @override
   List<Router> get routers => [
-        Router(Modular.initialRoute, module: HomeModule()),
+        Router('/', module: SplashModule()),
+        Router('/home', module: HomeModule()),
       ];
 
   @override

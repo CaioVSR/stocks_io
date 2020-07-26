@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'home_controller.dart';
+import 'splash_controller.dart';
 
-class HomePage extends StatefulWidget {
+class SplashPage extends StatefulWidget {
   final String title;
-  const HomePage({Key key, this.title = "Home"}) : super(key: key);
+  const SplashPage({Key key, this.title = "Splash"}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _SplashPageState createState() => _SplashPageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> {
+class _SplashPageState extends ModularState<SplashPage, SplashController> {
   //use 'controller' variable to access controller
 
   @override
