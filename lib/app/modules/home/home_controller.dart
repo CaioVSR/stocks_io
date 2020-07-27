@@ -18,6 +18,7 @@ abstract class _HomeControllerBase with Store {
   final AppController _appController = Modular.get();
 
   _HomeControllerBase(this._stockRepository) {
+    print('>>>>>>>>>>>>>>>>>>>>>> fui instanciado');
     fetchData();
   }
 

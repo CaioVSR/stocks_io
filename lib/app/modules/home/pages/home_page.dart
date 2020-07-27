@@ -67,40 +67,40 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ],
                 )
               : Padding(
-                padding: EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Text(
-                      'Seus ativos monitorados',
-                      style: AppTextStyle.p(fontWeight: FontWeight.bold),
-                    ),
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.start,
-                      alignment: WrapAlignment.start,
-                      spacing: 12,
-                      runSpacing: 12,
-                      children: <Widget>[
-                        for (var i = 0; i < favoredList.length; i++)
-                          InkWell(
-                            onTap: () => print(controller.stocks.length),
-                            child: Card(
-                              elevation: 3,
-                              child: SizedBox(
-                                height: 150.h,
-                                width: 150.w,
-                                child: Observer(builder: (_) {
-                                  return Text(favoredList[i].name);
-                                }),
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Text(
+                        'Seus ativos monitorados',
+                        style: AppTextStyle.p(fontWeight: FontWeight.bold),
+                      ),
+                      Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.start,
+                        alignment: WrapAlignment.start,
+                        spacing: 12,
+                        runSpacing: 12,
+                        children: <Widget>[
+                          for (var i = 0; i < favoredList.length; i++)
+                            InkWell(
+                              onTap: () => print(controller.stocks.length),
+                              child: Card(
+                                elevation: 3,
+                                child: SizedBox(
+                                  height: 150.h,
+                                  width: 150.w,
+                                  child: Observer(builder: (_) {
+                                    return Text(favoredList[i].name);
+                                  }),
+                                ),
                               ),
                             ),
-                          ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
         );
       }),
       floatingActionButton: AppFloatingActionButton(

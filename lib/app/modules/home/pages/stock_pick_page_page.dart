@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stocks_io/app/modules/home/home_controller.dart';
 import 'package:stocks_io/themes/app_colors.dart';
+import 'package:stocks_io/themes/app_text_style.dart';
 
 class StockPickPagePage extends StatefulWidget {
   final String title;
@@ -12,11 +14,12 @@ class StockPickPagePage extends StatefulWidget {
   _StockPickPagePageState createState() => _StockPickPagePageState();
 }
 
-class _StockPickPagePageState extends ModularState<StockPickPagePage, HomeController> {
-  //use 'controller' variable to access controller
+class _StockPickPagePageState extends State<StockPickPagePage> {
+  final HomeController controller = Modular.get();
 
   @override
   Widget build(BuildContext context) {
+    print(controller.stocks.length);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -38,8 +41,41 @@ class _StockPickPagePageState extends ModularState<StockPickPagePage, HomeContro
           height: 25.h,
         ),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              'Selecione os ativos que deseja monitorar',
+              style: AppTextStyle.p(fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
+            Observer(builder: (_) {
+              return Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: controller.stocks.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Text(controller.stocks[index].name);
+                  },
+                ),
+              );
+            }),
+            // ListView.separated(
+            //   itemBuilder: (context, index) {
+            //     return ListTile(title: Text(controller.stocks[index].name));
+            //   },
+            //   separatorBuilder: (context, index) {
+            //     return Divider(
+            //       thickness: 1,
+            //       color: AppColors.tiber,
+            //     );
+            //   },
+            //   itemCount: controller.stocks.length,
+            // ),
+          ],
+        ),
       ),
     );
   }

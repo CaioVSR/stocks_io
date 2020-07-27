@@ -10,7 +10,7 @@ class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind<IStockRepository>((i) => StockRepository(), lazy: false),
-        Bind((i) => HomeController(i.get())),
+        Bind((i) => HomeController(i.get()), singleton: true),
       ];
 
   @override
