@@ -1,6 +1,6 @@
 import 'package:stocks_io/app/core/auth/auth_controller.dart';
-import 'package:stocks_io/app/core/auth/repositories/auth_repository.dart';
-import 'package:stocks_io/app/core/auth/repositories/auth_repository_interface.dart';
+import 'package:stocks_io/app/core/auth/repository/auth_repository.dart';
+import 'package:stocks_io/app/core/auth/repository/auth_repository_interface.dart';
 import 'package:stocks_io/app/modules/login/login_module.dart';
 import 'package:stocks_io/app/modules/splash/splash_module.dart';
 

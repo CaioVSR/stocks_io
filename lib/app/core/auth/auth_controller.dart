@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:stocks_io/app/core/auth/repositories/auth_repository_interface.dart';
+import 'package:stocks_io/app/core/auth/repository/auth_repository_interface.dart';
 part 'auth_controller.g.dart';
 
 class AuthController = _AuthControllerBase with _$AuthController;

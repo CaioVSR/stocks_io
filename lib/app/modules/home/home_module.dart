@@ -1,3 +1,5 @@
+import 'package:stocks_io/app/core/repositories/stock_repository/stock_repository.dart';
+import 'package:stocks_io/app/core/repositories/stock_repository/stock_repository_interface.dart';
 import 'package:stocks_io/app/modules/home/pages/stock_pick_page_page.dart';
 
 import 'home_controller.dart';
@@ -7,7 +9,8 @@ import 'pages/home_page.dart';
 class HomeModule extends ChildModule {
   @override
   List<Bind> get binds => [
-        Bind((i) => HomeController()),
+        Bind<IStockRepository>((i) => StockRepository(), lazy: false),
+        Bind((i) => HomeController(i.get())),
       ];
 
   @override

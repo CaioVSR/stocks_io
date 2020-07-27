@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobx/mobx.dart';
+import 'package:stocks_io/app/app_controller.dart';
 import 'package:stocks_io/app/core/auth/auth_controller.dart';
 import 'package:stocks_io/app/core/widgets/app_floating_action_button.dart';
 import 'package:stocks_io/themes/app_colors.dart';
@@ -17,6 +19,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  final AppController appController = Modular.get();
+  ReactionDisposer _reactionDisposer;
+
+  @override
+  void initState() {
+    super.initState();
+    _reactionDisposer = autorun(
+      (fn) {
+        if (appController.stockServerStatus == StockServerStatus.down) {
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +49,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
       body: Observer(builder: (_) {
         return Center(
-          child: controller.value == 0
+          child: true
               ? Column(
                   children: <Widget>[
                     Padding(
@@ -79,4 +94,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
     );
   }
+  
+  @override
+  void dispose() {
+    _reactionDisposer.reaction.dispose();
+    super.dispose();
+  }
+
 }
