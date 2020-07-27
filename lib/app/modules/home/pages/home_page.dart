@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stocks_io/core/widgets/app_floating_action_button.dart';
+import 'package:stocks_io/app/core/auth/auth_controller.dart';
+import 'package:stocks_io/app/core/widgets/app_floating_action_button.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 import '../home_controller.dart';
@@ -16,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  //use 'controller' variable to access controller
 
   @override
   Widget build(BuildContext context) {

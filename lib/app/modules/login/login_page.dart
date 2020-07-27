@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:stocks_io/core/widgets/app_flat_button.dart';
-import 'package:stocks_io/core/widgets/app_text_form_field.dart';
+import 'package:stocks_io/app/core/auth/auth_controller.dart';
+import 'package:stocks_io/app/core/widgets/app_flat_button.dart';
+import 'package:stocks_io/app/core/widgets/app_text_form_field.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 import 'login_controller.dart';
@@ -16,6 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends ModularState<LoginPage, LoginController> {
+  var authController = Modular.get<AuthController>();
   var formKey = GlobalKey<FormState>();
   var emailFocusNode = FocusNode();
   var emailController = TextEditingController();
@@ -90,9 +92,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
             AppFlatButton(
               padding: EdgeInsets.only(left: 16.sp, right: 16.sp, top: 48.sp),
               lable: 'Continuar',
-              onPressed: () {
+              onPressed: () async {
                 if (formKey.currentState.validate()) {
-                  Modular.to.pushReplacementNamed('/home');
+                  var logged = await authController.loginWithEmail(
+                      email: emailController.text, password: passwordController.text);
+                  if (logged) {
+                    Modular.to.pushReplacementNamed('/home');
+                  } else {
+                    print('nao deu');
+                  }
                 }
               },
             ),
