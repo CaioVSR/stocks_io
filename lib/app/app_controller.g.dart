@@ -25,40 +25,10 @@ mixin _$AppController on _AppControllerBase, Store {
     });
   }
 
-  final _$valueAtom = Atom(name: '_AppControllerBase.value');
-
-  @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
-  }
-
-  @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
-    });
-  }
-
-  final _$_AppControllerBaseActionController =
-      ActionController(name: '_AppControllerBase');
-
-  @override
-  void increment() {
-    final _$actionInfo = _$_AppControllerBaseActionController.startAction(
-        name: '_AppControllerBase.increment');
-    try {
-      return super.increment();
-    } finally {
-      _$_AppControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-stockServerStatus: ${stockServerStatus},
-value: ${value}
+stockServerStatus: ${stockServerStatus}
     ''';
   }
 }

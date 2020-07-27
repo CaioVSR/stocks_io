@@ -4,7 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stocks_io/app/app_controller.dart';
-import 'package:stocks_io/app/core/auth/auth_controller.dart';
 import 'package:stocks_io/app/core/widgets/app_floating_action_button.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
@@ -25,12 +24,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   @override
   void initState() {
     super.initState();
-    _reactionDisposer = autorun(
-      (fn) {
-        if (appController.stockServerStatus == StockServerStatus.down) {
-        }
-      },
-    );
+    _reactionDisposer = controller.connectionChecker(context);
   }
 
   @override
@@ -94,11 +88,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       ),
     );
   }
-  
+
   @override
   void dispose() {
     _reactionDisposer.reaction.dispose();
     super.dispose();
   }
-
 }
