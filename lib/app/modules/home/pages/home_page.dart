@@ -43,59 +43,59 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       ),
       body: Observer(builder: (_) {
-        return Center(
-          child: controller.favoredList.length == 0
-              ? Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(top: 160.h),
-                      child: Image.asset(
-                        'assets/images/image_01.png',
-                        height: 188.h,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 62.w, right: 62.w, top: 16.h),
-                      child: Text(
-                        'Você ainda não possui nennum ativo monitorado.',
-                        style: AppTextStyle.p(),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  ],
-                )
-              : Padding(
-                  padding: EdgeInsets.all(16.sp),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Text(
-                        'Seus ativos monitorados',
-                        style: AppTextStyle.p(fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(
-                        child: Observer(builder: (_) {
-                          return ListView.builder(
-                            itemCount: controller.favoredList.length,
-                            itemBuilder: (context, index) {
-                              return AppStockCard(
-                                stockName: controller.favoredList[index].name,
-                                tickerSymbol: controller.favoredList[index].tickerSymbol,
-                                currentValue: controller.favoredList[index].currentValue,
-                                minValue: controller.favoredList[index].minValue,
-                                maxValue: controller.favoredList[index].maxValue,
-                                openingValue: controller.favoredList[index].openingValue,
-                                onTap: () => controller.removeFavorite(controller.favoredList[index].tickerSymbol),
-                              );
-                            },
-                          );
-                        }),
-                      ),
-                    ],
-                  ),
+        if (controller.favoredList.length == 0) {
+          return Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 160.h),
+                child: Image.asset(
+                  'assets/images/image_01.png',
+                  height: 188.h,
+                  fit: BoxFit.contain,
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 62.w, right: 62.w, top: 16.h),
+                child: Text(
+                  'Você ainda não possui nennum ativo monitorado.',
+                  style: AppTextStyle.p(),
+                  textAlign: TextAlign.center,
+                ),
+              )
+            ],
+          );
+        }
+        return Padding(
+          padding: EdgeInsets.all(16.sp),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                child: Text(
+                  'Seus ativos monitorados',
+                  style: AppTextStyle.p(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.favoredList.length,
+                  itemBuilder: (context, index) {
+                    return AppStockCard(
+                      stockName: controller.favoredList[index].name,
+                      tickerSymbol: controller.favoredList[index].tickerSymbol,
+                      currentValue: controller.favoredList[index].currentValue,
+                      minValue: controller.favoredList[index].minValue,
+                      maxValue: controller.favoredList[index].maxValue,
+                      openingValue: controller.favoredList[index].openingValue,
+                      onTap: () => controller.removeFavorite(controller.favoredList[index].tickerSymbol),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         );
       }),
       floatingActionButton: AppFloatingActionButton(

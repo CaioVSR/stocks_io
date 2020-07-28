@@ -46,23 +46,23 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Text(
-              'Selecione os ativos que deseja monitorar',
-              style: AppTextStyle.p(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.start,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              child: Text(
+                'Selecione os ativos que deseja monitorar',
+                style: AppTextStyle.p(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.start,
+              ),
             ),
             Observer(builder: (_) {
               return Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => Divider(color: AppColors.tiber, thickness: 1),
                   itemCount: controller.stocksList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       child: Text(controller.stocksList[index].tickerSymbol),
-                      onTap: () {
-                        print(index);
-                        print(controller.stocksList[index].toJson());
-                        controller.addFavorite(index);
-                      },
+                      onTap: () => controller.addFavorite(index),
                     );
                   },
                 ),

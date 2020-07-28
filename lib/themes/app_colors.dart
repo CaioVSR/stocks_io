@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color get kellyGreen => Color(0xFF31DE1D);
+  static Color get kellyGreen => Color(0xFF31BD1A);
   static Color get alizarin => Color(0xFFED3237);
 
   static Color get irisBlue => Color(0xFF00ADD2);

@@ -53,22 +53,27 @@ abstract class _HomeControllerBase with Store {
 
     if (index == -1) {
       var stock = Stock(
-          openingValue: stockValue,
-          tickerSymbol: stockName,
-          name: stocksNames[stockName],
-          currentValue: stockValue,
-          minValue: stockValue,
-          maxValue: stockValue,
-          favored: false);
+        openingValue: stockValue,
+        tickerSymbol: stockName,
+        name: stocksNames[stockName],
+        currentValue: stockValue,
+        minValue: stockValue,
+        maxValue: stockValue,
+        favored: false,
+      );
       stocksList.add(stock);
     } else {
-      stocksList[index].currentValue = stockValue;
-      if (stockValue < stocksList[index].minValue) {
-        stocksList[index].minValue = stockValue;
-      }
-      if (stockValue > stocksList[index].maxValue) {
-        stocksList[index].maxValue = stockValue;
-      }
+      var stock = Stock(
+        currentValue: stockValue,
+        favored: stocksList[index].favored,
+        maxValue: stockValue > stocksList[index].maxValue ? stockValue : stocksList[index].maxValue,
+        minValue: stockValue < stocksList[index].minValue ? stockValue : stocksList[index].minValue,
+        name: stocksList[index].name,
+        openingValue: stocksList[index].openingValue,
+        tickerSymbol: stocksList[index].tickerSymbol,
+      );
+
+      stocksList[index] = stock;
 
       if (stocksList[index].favored) {
         var favoredIndex = favoredList.indexWhere((element) => element.tickerSymbol == stocksList[index].tickerSymbol);
