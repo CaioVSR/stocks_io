@@ -4,8 +4,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stocks_io/app/app_controller.dart';
-import 'package:stocks_io/app/core/models/stock_model.dart';
 import 'package:stocks_io/app/core/widgets/app_floating_action_button.dart';
+import 'package:stocks_io/app/core/widgets/app_stock_card.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 import '../home_controller.dart';
@@ -43,9 +43,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
         ),
       ),
       body: Observer(builder: (_) {
-        List<Stock> favoredList = controller.stocks.where((element) => element.favored).toList();
         return Center(
-          child: favoredList.length == 0
+          child: controller.favoredList.length == 0
               ? Column(
                   children: <Widget>[
                     Padding(
@@ -67,7 +66,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   ],
                 )
               : Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.sp),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -76,27 +75,23 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                         'Seus ativos monitorados',
                         style: AppTextStyle.p(fontWeight: FontWeight.bold),
                       ),
-                      Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        alignment: WrapAlignment.start,
-                        spacing: 12,
-                        runSpacing: 12,
-                        children: <Widget>[
-                          for (var i = 0; i < favoredList.length; i++)
-                            InkWell(
-                              onTap: () => print(controller.stocks.length),
-                              child: Card(
-                                elevation: 3,
-                                child: SizedBox(
-                                  height: 150.h,
-                                  width: 150.w,
-                                  child: Observer(builder: (_) {
-                                    return Text(favoredList[i].name);
-                                  }),
-                                ),
-                              ),
-                            ),
-                        ],
+                      Expanded(
+                        child: Observer(builder: (_) {
+                          return ListView.builder(
+                            itemCount: controller.favoredList.length,
+                            itemBuilder: (context, index) {
+                              return AppStockCard(
+                                stockName: controller.favoredList[index].name,
+                                tickerSymbol: controller.favoredList[index].tickerSymbol,
+                                currentValue: controller.favoredList[index].currentValue,
+                                minValue: controller.favoredList[index].minValue,
+                                maxValue: controller.favoredList[index].maxValue,
+                                openingValue: controller.favoredList[index].openingValue,
+                                onTap: () => controller.removeFavorite(controller.favoredList[index].tickerSymbol),
+                              );
+                            },
+                          );
+                        }),
                       ),
                     ],
                   ),

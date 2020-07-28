@@ -19,7 +19,7 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.stocks.length);
+    print(controller.stocksList.length);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -54,10 +54,16 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
             Observer(builder: (_) {
               return Expanded(
                 child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: controller.stocks.length,
+                  itemCount: controller.stocksList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text(controller.stocks[index].name);
+                    return GestureDetector(
+                      child: Text(controller.stocksList[index].tickerSymbol),
+                      onTap: () {
+                        print(index);
+                        print(controller.stocksList[index].toJson());
+                        controller.addFavorite(index);
+                      },
+                    );
                   },
                 ),
               );
