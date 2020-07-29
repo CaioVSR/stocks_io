@@ -1,16 +1,13 @@
-# stocks_io
+# Desafio Toro mobile
 
-A new Flutter project. Created by Slidy
+Aplicação flutter de exibição de ações em tempo real do desafio Toro mobile.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Antes de iniciar o emulador faça os seguintes passos:
 
-A few resources to get you started if this is your first Flutter project:
+    1. Após clonar ou baixar o repositório execute o comando `flutter packages get` dentro da pasta do projeto para baixar as dependências necessárias.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+    2. Rode a imagem docker fornecida para o desafio.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+O app foi desenvolvido utilizando o padrão MVC e o mobx para gestão de estado.
