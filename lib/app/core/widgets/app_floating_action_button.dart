@@ -10,18 +10,24 @@ class AppFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      backgroundColor: AppColors.tiber,
-      icon: Icon(
-        Icons.add,
-        color: AppColors.irisBlue,
-        size: 24.sp,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 16.h),
+      child: Container(
+        constraints: BoxConstraints(maxHeight: 35.h),
+        child: FloatingActionButton.extended(
+          backgroundColor: AppColors.tiber,
+          icon: Icon(
+            Icons.add,
+            color: AppColors.irisBlue,
+            size: 24.sp,
+          ),
+          label: Text(
+            'Adicionar Ativos',
+            style: AppTextStyle.p(fontWeight: FontWeight.bold, color: AppColors.white),
+          ),
+          onPressed: onPressed,
+        ),
       ),
-      label: Text(
-        'Adicionar Ativos',
-        style: AppTextStyle.p(fontWeight: FontWeight.bold, color: AppColors.white),
-      ),
-      onPressed: onPressed,
     );
   }
 }

@@ -6,11 +6,11 @@ import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 
 class AppBottomSheet {
-  static noConnection(BuildContext context, Function btnOneOnTap, Function btnTwoOnTap) {
+  static noConnection({BuildContext context, Function btnOneOnTap, Function btnTwoOnTap}) {
     return modalBottomSheet(
       mainColor: AppColors.alizarin,
-      isDimissible: true,
-      enableDrag: true,
+      isDimissible: false,
+      enableDrag: false,
       context: context,
       imageURL: 'assets/images/no_connection.png',
       imageHeight: 250,
@@ -20,6 +20,21 @@ class AppBottomSheet {
       btnOneLable: 'Tentar novamente',
       btnOneOnTap: btnOneOnTap,
       btnTwoLable: 'Sair do app',
+      btnTwoOnTap: btnTwoOnTap,
+    );
+  }
+
+  static removeStock({BuildContext context, Function btnOneOnTap, Function btnTwoOnTap, String stockTickersymbol}) {
+    return modalBottomSheet(
+      mainColor: AppColors.alizarin,
+      isDimissible: true,
+      enableDrag: true,
+      context: context,
+      title: 'Remover ativo',
+      subtitle: 'Deseja realmente remover o ativo $stockTickersymbol da sua lista de ativos monitorados?',
+      btnOneLable: 'Sim, remover ativo',
+      btnOneOnTap: btnOneOnTap,
+      btnTwoLable: 'Cancelar',
       btnTwoOnTap: btnTwoOnTap,
     );
   }
@@ -114,15 +129,13 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Visibility(
-              visible: widget.imageURL != null,
-              child: Image.asset(
-                widget.imageURL ?? '',
+            if (widget.imageURL != null)
+              Image.asset(
+                widget.imageURL,
                 height: widget.imageHeight.h ?? 250,
                 width: widget.imageWidth.w ?? 250,
                 fit: BoxFit.contain,
               ),
-            ),
             Visibility(
               visible: widget.title != null,
               child: Text(
@@ -148,7 +161,6 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 padding: EdgeInsets.only(top: 36.h),
                 child: AppFlatButton(
                   color: AppColors.alizarin,
-                  height: 40.h,
                   width: 303.w,
                   lable: widget.btnOneLable ?? '',
                   onPressed: widget.btnOneOnTap ?? null,

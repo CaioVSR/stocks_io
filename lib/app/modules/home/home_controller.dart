@@ -126,10 +126,13 @@ abstract class _HomeControllerBase with Store {
     return autorun(
       (fn) {
         if (_appController.stockServerStatus == StockServerStatus.down) {
-          AppBottomSheet.noConnection(context, () {
-            Modular.to.pop();
-            fetchData();
-          }, () => exit(0));
+          AppBottomSheet.noConnection(
+              context: context,
+              btnOneOnTap: () {
+                Modular.to.pop();
+                fetchData();
+              },
+              btnTwoOnTap: () => exit(0));
         }
       },
     );

@@ -31,7 +31,6 @@ class AppFlatButton extends StatelessWidget {
     return Container(
       padding: padding ?? EdgeInsets.zero,
       margin: margin ?? EdgeInsets.zero,
-      height: height,
       width: width,
       child: FlatButton(
         splashColor: Colors.transparent,

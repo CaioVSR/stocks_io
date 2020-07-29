@@ -27,11 +27,7 @@ class AppTextStyle {
         color: color ?? AppColors.black30,
       );
 
-  static TextStyle h4({
-    Color color,
-    FontWeight fontWeight,
-  }) =>
-      TextStyle(
+  static TextStyle h4({Color color, FontWeight fontWeight}) => TextStyle(
         fontFamily: 'Poppins',
         fontStyle: FontStyle.normal,
         fontWeight: fontWeight ?? FontWeight.normal,

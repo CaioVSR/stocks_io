@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobx/mobx.dart';
 import 'package:stocks_io/app/app_controller.dart';
 import 'package:stocks_io/app/core/widgets/app_floating_action_button.dart';
+import 'package:stocks_io/app/core/widgets/app_modal_bottom_sheet.dart';
 import 'package:stocks_io/app/core/widgets/app_stock_card.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
@@ -84,7 +85,15 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   itemBuilder: (context, index) {
                     return AppStockCard(
                       stock: controller.favoredList[index],
-                      onTap: () => controller.removeFavorite(controller.favoredList[index].tickerSymbol),
+                      // onTap:
+                      onTap: () => AppBottomSheet.removeStock(
+                          context: context,
+                          stockTickersymbol: controller.favoredList[index].tickerSymbol,
+                          btnOneOnTap: () {
+                            controller.removeFavorite(controller.favoredList[index].tickerSymbol);
+                            Modular.to.pop();
+                          },
+                          btnTwoOnTap: () => Modular.to.pop()),
                     );
                   },
                 ),
