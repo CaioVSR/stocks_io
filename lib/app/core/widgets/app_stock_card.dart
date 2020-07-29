@@ -152,7 +152,7 @@ class ValueColumn extends StatelessWidget {
                       ? '${value.toStringAsFixed(2)} %'
                       : 'R\$ ${(value.toStringAsFixed(2)).replaceAll('.', ',')}',
                   style: AppTextStyle.p(fontWeight: FontWeight.bold, color: textColor),
-                  overflow: TextOverflow.ellipsis,
+                  overflow: isPercentage ? TextOverflow.ellipsis : null,
                 ),
               ),
             ],
