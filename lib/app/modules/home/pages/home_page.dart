@@ -83,12 +83,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
                   itemCount: controller.favoredList.length,
                   itemBuilder: (context, index) {
                     return AppStockCard(
-                      stockName: controller.favoredList[index].name,
-                      tickerSymbol: controller.favoredList[index].tickerSymbol,
-                      currentValue: controller.favoredList[index].currentValue,
-                      minValue: controller.favoredList[index].minValue,
-                      maxValue: controller.favoredList[index].maxValue,
-                      openingValue: controller.favoredList[index].openingValue,
+                      stock: controller.favoredList[index],
                       onTap: () => controller.removeFavorite(controller.favoredList[index].tickerSymbol),
                     );
                   },

@@ -1,33 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stocks_io/app/core/models/stock_model.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
 
 class AppStockCard extends StatelessWidget {
-  final String tickerSymbol;
-  final String stockName;
-  final double currentValue;
-  final double minValue;
-  final double maxValue;
-  final double openingValue;
+  final Stock stock;
   final Function onTap;
   final bool isPercentage;
 
   const AppStockCard({
     Key key,
-    @required this.stockName,
-    @required this.tickerSymbol,
-    @required this.currentValue,
-    @required this.minValue,
-    @required this.maxValue,
+    @required this.stock,
     @required this.onTap,
-    @required this.openingValue,
     this.isPercentage = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var variation = ((currentValue / openingValue) - 1);
+    var variation = double.tryParse(((stock.currentValue / stock.openingValue) - 1).toStringAsFixed(2));
+    if (variation.isNaN) {
+      variation = 0.0;
+    }
 
     return Card(
       elevation: 6,
@@ -45,12 +39,12 @@ class AppStockCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
                       Text(
-                        tickerSymbol,
+                        stock.tickerSymbol,
                         style: AppTextStyle.p(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.start,
                       ),
                       Text(
-                        stockName,
+                        stock.name,
                         style: AppTextStyle.small(),
                       ),
                     ],
@@ -69,7 +63,7 @@ class AppStockCard extends StatelessWidget {
                   Expanded(
                     child: ValueColumn(
                       title: 'COTAÇÃO',
-                      value: currentValue,
+                      value: stock.currentValue,
                       backgroundColor: AppColors.tiber,
                       textColor: AppColors.white,
                     ),
@@ -77,7 +71,7 @@ class AppStockCard extends StatelessWidget {
                   Expanded(
                     child: ValueColumn(
                       title: 'MIN(DIA)',
-                      value: minValue,
+                      value: stock.minValue,
                       backgroundColor: AppColors.grey240,
                       textColor: AppColors.tiber,
                     ),
@@ -85,7 +79,7 @@ class AppStockCard extends StatelessWidget {
                   Expanded(
                     child: ValueColumn(
                       title: 'MAX(DIA)',
-                      value: maxValue,
+                      value: stock.maxValue,
                       backgroundColor: AppColors.grey240,
                       textColor: AppColors.tiber,
                     ),
@@ -138,10 +132,26 @@ class ValueColumn extends StatelessWidget {
         ),
         Container(
           margin: EdgeInsets.only(top: 4.h),
-          padding: EdgeInsets.symmetric(horizontal: 8.w),
-          child: Text(
-            isPercentage ? '${value.toStringAsFixed(2)} %' : 'R\$ ${(value.toStringAsFixed(2)).replaceAll('.', ',')}',
-            style: AppTextStyle.p(fontWeight: FontWeight.bold, color: textColor),
+          padding: EdgeInsets.symmetric(horizontal: 4.w),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (isPercentage)
+                Padding(
+                  padding: EdgeInsets.only(right: 2.w),
+                  child: Icon(
+                    value == 0 ? Icons.arrow_forward : value < 0 ? Icons.arrow_downward : Icons.arrow_upward,
+                    size: 16.sp,
+                    color: AppColors.white,
+                  ),
+                ),
+              Text(
+                isPercentage
+                    ? '${value.toStringAsFixed(2)} %'
+                    : 'R\$ ${(value.toStringAsFixed(2)).replaceAll('.', ',')}',
+                style: AppTextStyle.p(fontWeight: FontWeight.bold, color: textColor),
+              ),
+            ],
           ),
           decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(3)),
         ),

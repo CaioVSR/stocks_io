@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stocks_io/app/core/models/stock_model.dart';
+import 'package:stocks_io/app/core/widgets/app_checkbox_list_tile.dart';
 import 'package:stocks_io/app/modules/home/home_controller.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
@@ -19,7 +21,6 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
 
   @override
   Widget build(BuildContext context) {
-    print(controller.stocksList.length);
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
@@ -57,29 +58,24 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
             Observer(builder: (_) {
               return Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => Divider(color: AppColors.tiber, thickness: 1),
+                  separatorBuilder: (context, index) => Divider(
+                    color: AppColors.tiber,
+                    thickness: 1,
+                    height: 0,
+                  ),
                   itemCount: controller.stocksList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      child: Text(controller.stocksList[index].tickerSymbol),
-                      onTap: () => controller.addFavorite(index),
+                    var stock = controller.stocksList[index];
+                    return AppCheckboxListTile(
+                      stock: stock,
+                      index: index,
+                      onChanged: (value) =>
+                          value ? controller.addFavorite(index) : controller.removeFavorite(stock.tickerSymbol),
                     );
                   },
                 ),
               );
             }),
-            // ListView.separated(
-            //   itemBuilder: (context, index) {
-            //     return ListTile(title: Text(controller.stocks[index].name));
-            //   },
-            //   separatorBuilder: (context, index) {
-            //     return Divider(
-            //       thickness: 1,
-            //       color: AppColors.tiber,
-            //     );
-            //   },
-            //   itemCount: controller.stocks.length,
-            // ),
           ],
         ),
       ),
