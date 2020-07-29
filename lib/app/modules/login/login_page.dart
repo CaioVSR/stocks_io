@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:stocks_io/app/core/auth/auth_controller.dart';
 import 'package:stocks_io/app/core/widgets/app_flat_button.dart';
+import 'package:stocks_io/app/core/widgets/app_modal_bottom_sheet.dart';
 import 'package:stocks_io/app/core/widgets/app_text_form_field.dart';
 import 'package:stocks_io/themes/app_colors.dart';
 import 'package:stocks_io/themes/app_text_style.dart';
@@ -99,7 +100,15 @@ class _LoginPageState extends ModularState<LoginPage, LoginController> {
                   if (logged) {
                     Modular.to.pushReplacementNamed('/home');
                   } else {
-                    print('nao deu');
+                    AppBottomSheet.wrongPasswordOrEmail(
+                      context: context,
+                      btnOneOnTap: () {
+                        emailController.text = '';
+                        passwordController.text = '';
+                        emailFocusNode.requestFocus();
+                        Modular.to.pop();
+                      },
+                    );
                   }
                 }
               },

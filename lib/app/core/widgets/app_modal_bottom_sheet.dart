@@ -38,6 +38,22 @@ class AppBottomSheet {
       btnTwoOnTap: btnTwoOnTap,
     );
   }
+
+  static wrongPasswordOrEmail({BuildContext context, Function btnOneOnTap}) {
+    return modalBottomSheet(
+      mainColor: AppColors.alizarin,
+      isDimissible: true,
+      enableDrag: true,
+      context: context,
+      imageURL: 'assets/images/wrong_pass.png',
+      imageHeight: 250,
+      imageWidth: 250,
+      title: 'Login Inválido!',
+      subtitle: 'O e-mail ou senha digitado está incorreto, por favor verifique os dados e tente novamente.',
+      btnOneLable: 'Tentar novamente',
+      btnOneOnTap: btnOneOnTap,
+    );
+  }
 }
 
 modalBottomSheet({
