@@ -147,7 +147,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
               child: Padding(
                 padding: EdgeInsets.only(top: 36.h),
                 child: AppFlatButton(
-                  color: widget.mainColor ?? AppColors.tiber,
+                  color: AppColors.alizarin,
                   height: 40.h,
                   width: 303.w,
                   lable: widget.btnOneLable ?? '',

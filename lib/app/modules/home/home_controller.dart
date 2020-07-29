@@ -7,6 +7,7 @@ import 'package:mobx/mobx.dart';
 import 'package:stocks_io/app/app_controller.dart';
 import 'package:stocks_io/app/core/models/stock_model.dart';
 import 'package:stocks_io/app/core/repositories/stock_repository/stock_repository_interface.dart';
+import 'package:stocks_io/app/core/utils/app_enums.dart';
 import 'package:stocks_io/app/core/utils/stocks_names.dart';
 import 'package:stocks_io/app/core/widgets/app_modal_bottom_sheet.dart';
 
@@ -27,6 +28,26 @@ abstract class _HomeControllerBase with Store {
 
   @observable
   ObservableList<Stock> favoredList = <Stock>[].asObservable();
+
+  @action
+  sort({@required SortType sortType}) {
+    switch (sortType) {
+      case SortType.highestValue:
+        stocksList.sort((a, b) => b.currentValue.compareTo(a.currentValue));
+        break;
+      case SortType.lowestValue:
+        stocksList.sort((a, b) => a.currentValue.compareTo(b.currentValue));
+        break;
+      case SortType.atz:
+        stocksList.sort((a, b) => a.tickerSymbol.compareTo(b.tickerSymbol));
+        break;
+      case SortType.zta:
+        stocksList.sort((a, b) => b.tickerSymbol.compareTo(a.tickerSymbol));
+        break;
+      default:
+        stocksList.sort((a, b) => b.currentValue.compareTo(a.currentValue));
+    }
+  }
 
   @action
   removeFavorite(String tickerSymbol) {

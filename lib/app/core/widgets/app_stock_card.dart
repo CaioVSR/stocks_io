@@ -145,11 +145,15 @@ class ValueColumn extends StatelessWidget {
                     color: AppColors.white,
                   ),
                 ),
-              Text(
-                isPercentage
-                    ? '${value.toStringAsFixed(2)} %'
-                    : 'R\$ ${(value.toStringAsFixed(2)).replaceAll('.', ',')}',
-                style: AppTextStyle.p(fontWeight: FontWeight.bold, color: textColor),
+              Container(
+                constraints: BoxConstraints(maxWidth: 50.w),
+                child: Text(
+                  isPercentage
+                      ? '${value.toStringAsFixed(2)} %'
+                      : 'R\$ ${(value.toStringAsFixed(2)).replaceAll('.', ',')}',
+                  style: AppTextStyle.p(fontWeight: FontWeight.bold, color: textColor),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
