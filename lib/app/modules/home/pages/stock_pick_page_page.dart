@@ -24,6 +24,7 @@ class _StockPickPagePageState extends State<StockPickPagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         actions: <Widget>[
           PopupMenuButton(
             offset: Offset(0, 40),
